@@ -32,16 +32,16 @@ channel_ids = [-1002059043048, -1001711008160, -1002034696352, -1001860294823]
 
 async def check_channels_membership(user_id):
     for channel_id in channel_ids:
-        if not await app.get_chat_member(channel_id, user_id):
+        if not await VenomX.get_chat_member(channel_id, user_id):
             return False
     return True
 
-@app.on_message(filters.new_chat_members)
+@VenomX.on_message(filters.new_chat_members)
 async def welcome(_, m: Message):
     for member in m.new_chat_members:
         await m.reply_photo(photo=random.choice(IMG), caption=START)
 
-@app.on_message(filters.private & filters.command(["start", "aistart"]))
+@VenomX.on_message(filters.private & filters.command(["start", "aistart"]))
 async def start_command(_, m: Message):
     user_id = m.from_user.id
     if await check_channels_membership(user_id):
