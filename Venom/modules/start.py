@@ -30,6 +30,9 @@ from Venom.modules.helpers import (
 
 channel_ids = [-1002059043048, -1001711008160, -1002034696352, -1001860294823]
 
+
+
+
 async def check_channels_membership(user_id):
     for channel_id in channel_ids:
         if not await VenomX.get_chat_member(channel_id, user_id):
@@ -44,52 +47,50 @@ async def welcome(_, m: Message):
 @VenomX.on_message(filters.private & filters.command(["start", "aistart"]))
 async def start_command(_, m: Message):
     user_id = m.from_user.id
-    if await check_channels_membership(user_id):
-        # User is member of all channels, execute start command
-        if m.chat.type == ChatType.PRIVATE:
-            accha = await m.reply_text(
-                text=random.choice(EMOJIOS),
-            )
-            await asyncio.sleep(1.3)
-            await accha.edit("__ᴅιиg ᴅσиg ꨄ︎ ѕтαятιиg..__")
-            await asyncio.sleep(0.2)
-            await accha.edit("__ᴅιиg ᴅσиg ꨄ sтαятιиg.....__")
-            await asyncio.sleep(0.2)
-            await accha.edit("__ᴅιиg ᴅσиg ꨄ︎ sтαятιиg..__")
-            await asyncio.sleep(0.2)
-            await accha.delete()
-            umm = await m.reply_sticker(sticker=random.choice(STICKER))
-            await asyncio.sleep(2)
-            await umm.delete()
-            await m.reply_photo(
-                photo=random.choice(IMG),
-                caption=f"""**๏ ʜᴇʏ, ɪ ᴀᴍ {app.name}**\n**➻ ᴀɴ ᴀɪ ʙᴀsᴇᴅ ᴄʜᴀᴛʙᴏᴛ.**\n**──────────────**\n**➻ ᴜsᴀɢᴇ /chatbot [ᴏɴ/ᴏғғ]**\n<b>||๏ ʜɪᴛ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ ғᴏʀ ʜᴇʟᴘ||</b>""",
-                reply_markup=InlineKeyboardMarkup(DEV_OP),
-            )
-            await add_served_user(m.from_user.id)
+    try:
+        if await check_channels_membership(user_id):
+            # User is member of all channels, execute start command
+            if m.chat.type == ChatType.PRIVATE:
+                accha = await m.reply_text(
+                    text=random.choice(EMOJIOS),
+                )
+                await asyncio.sleep(1.3)
+                await accha.edit("__ᴅιиg ᴅσиg ꨄ︎ ѕтαятιиg..__")
+                await asyncio.sleep(0.2)
+                await accha.edit("__ᴅιиg ᴅσиg ꨄ sтαятιиg.....__")
+                await asyncio.sleep(0.2)
+                await accha.edit("__ᴅιиg ᴅσиg ꨄ︎ sтαятιиg..__")
+                await asyncio.sleep(0.2)
+                await accha.delete()
+                umm = await m.reply_sticker(sticker=random.choice(STICKER))
+                await asyncio.sleep(2)
+                await umm.delete()
+                await m.reply_photo(
+                    photo=random.choice(IMG),
+                    caption=f"""**๏ ʜᴇʏ, ɪ ᴀᴍ {VenomX.name}**\n**➻ ᴀɴ ᴀɪ ʙᴀsᴇᴅ ᴄʜᴀᴛʙᴏᴛ.**\n**──────────────**\n**➻ ᴜsᴀɢᴇ /chatbot [ᴏɴ/ᴏғғ]**\n<b>||๏ ʜɪᴛ ʜᴇʟᴘ ʙᴜᴛᴛᴏɴ ғᴏʀ ʜᴇʟᴘ||</b>""",
+                    reply_markup=InlineKeyboardMarkup(DEV_OP),
+                )
+                await add_served_user(m.from_user.id)
+            else:
+                await m.reply_photo(
+                    photo=random.choice(IMG),
+                    caption=START,
+                    reply_markup=InlineKeyboardMarkup(HELP_START),
+                )
+                await add_served_chat(m.chat.id)
         else:
-            await m.reply_photo(
-                photo=random.choice(IMG),
-                caption=START,
-                reply_markup=InlineKeyboardMarkup(HELP_START),
+            # User is not a member of all channels, handle this case
+            await m.reply_text(
+                "You must join all our channels first!"
             )
-            await add_served_chat(m.chat.id)
-    else:
-        # User is not a member of all channels, send message with button
-        await m.reply_text(
-            "You must join all our channels first!",
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(
-                            "Join Our Channels",
-                            url="https://t.me/your_channel_username"
-                        )
-                    ]
-                ]
-            )
-        )
+    except Exception as e:
+        # Handle other errors gracefully
+        print(f"Error: {e}")
 
+# Add other commands and functions here
+
+# Run the client
+                
 
 
 @VenomX.on_cmd("help")
