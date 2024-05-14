@@ -100,6 +100,8 @@ async def start_command(_, m: Message):
                             "join",
                             url="https://t.me/thanosprosss"
                         ),
+                    ],
+                    [
                         InlineKeyboardButton(
                             "join",
                             url="https://t.me/thanosprosss"
