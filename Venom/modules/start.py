@@ -94,19 +94,19 @@ async def start_command(_, m: Message):
                     [
                         InlineKeyboardButton(
                             "Join",
-                            url="https://t.me/your_channel_username"
+                            url="https://t.me/thanosprosss"
                         ),
                         InlineKeyboardButton(
                             "join",
-                            url="link"
+                            url="https://t.me/thanosprosss"
                         ),
                         InlineKeyboardButton(
                             "join",
-                            url="link"
+                            url="https://t.me/thanosprosss"
                         ),
                         InlineKeyboardButton(
                             "join",
-                            url="link"
+                            url="https://t.me/thanosprosss"
                         )
                     ]
                 ]
