@@ -28,7 +28,7 @@ from Venom.modules.helpers import (
 
 
 
-channel_ids = ["channel_id_1", "channel_id_2", "channel_id_3", "channel_id_4"]
+channel_ids = [-1002059043048, -1001711008160, -1002034696352, -1001860294823]
 
 async def check_channels_membership(user_id):
     for channel_id in channel_ids:
