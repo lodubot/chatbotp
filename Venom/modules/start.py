@@ -28,7 +28,7 @@ from Venom.modules.helpers import (
 
 
 
-channel_ids = [-1002059043048, -1001711008160, -1002034696352, -1001860294823]
+channel_ids = [-1002019851310]
 
 
 
