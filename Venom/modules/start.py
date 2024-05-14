@@ -29,10 +29,13 @@ from Venom.modules.helpers import (
 
 
 
-channel_ids = [-1002019851310]
+channel_ids = [-1002059043048, -1002034696352, -1001860294823, -1001711008160]
 
 
-
+CHANNEL_USERNAME = 'Dream99_VIP_Hub'
+CHANNEL_USERNAME3 = 'Earn_Money_PayTM_UPI'
+CHANNEL_USERNAME2 = 'PrivateLoot'
+CHANNEL_USERNAME4 = "Official_InstaPLUS"
 
 async def check_channels_membership(user_id):
     for channel_id in channel_ids:
@@ -94,21 +97,21 @@ async def start_command(_, m: Message):
                     [
                         InlineKeyboardButton(
                             "Join",
-                            url="https://t.me/thanosprosss"
+                            url=f"https://t.me/{CHANNEL_USERNAME}"
                         ),
                         InlineKeyboardButton(
                             "join",
-                            url="https://t.me/thanosprosss"
+                            url=f"https://t.me/{CHANNEL_USERNAME2}"
                         ),
                     ],
                     [
                         InlineKeyboardButton(
                             "join",
-                            url="https://t.me/thanosprosss"
+                            url=f"https://t.me/{CHANNEL_USERNAME3}"
                         ),
                         InlineKeyboardButton(
                             "join",
-                            url="https://t.me/thanosprosss"
+                            url=f"https://t.me/{CHANNEL_USERNAME4}"
                         )
                     ]
                 ]
