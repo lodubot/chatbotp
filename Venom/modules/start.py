@@ -85,11 +85,33 @@ async def start_command(_, m: Message):
                 "You must join all our channels first!"
             )
     except UserNotParticipant:
-        # Handle other errors gracefully
+        
+        # User is not a member of all channels, send message with button
         await m.reply_text(
-            "You must join all our channels first!"
+            "You must join all our channels first!",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Join",
+                            url="https://t.me/your_channel_username"
+                        ),
+                        InlineKeyboardButton(
+                            "join",
+                            url="link"
+                        ),
+                        InlineKeyboardButton(
+                            "join",
+                            url="link"
+                        ),
+                        InlineKeyboardButton(
+                            "join",
+                            url="link"
+                        )
+                    ]
+                ]
+            )
         )
-
 # Add other commands and functions here
 
 # Run the client
