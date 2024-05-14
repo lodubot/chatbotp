@@ -8,6 +8,7 @@ from pyrogram.enums import ChatType, ParseMode
 from pyrogram.types import InlineKeyboardButton
 from pyrogram import Client
 from pyrogram import filters
+from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, Message
 
@@ -83,9 +84,11 @@ async def start_command(_, m: Message):
             await m.reply_text(
                 "You must join all our channels first!"
             )
-    except Exception as e:
+    except UserNotParticipant:
         # Handle other errors gracefully
-        print(f"Error: {e}")
+        await m.reply_text(
+            "You must join all our channels first!"
+        )
 
 # Add other commands and functions here
 
