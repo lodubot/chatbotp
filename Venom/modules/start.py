@@ -165,14 +165,14 @@ async def welcome(_, m: Message):
 
 # Define the owner's user ID
 
-
+app = VenomX
 # Handle /broadcast command
 @VenomX.on_message(filters.command(["broadcast"]) & filters.private)
 async def handle_broadcast(client, message: Message):
     global successful_messages, failed_messages
     if message.from_user.id == OWNER_ID:
         broadcast_message = ' '.join(message.text.split()[1:])
-        async for user in app.iter_users():
+        async for user in VenomX.iter_users():
             try:
                 await VenomX.send_message(user.id, broadcast_message)
                 successful_messages += 1
