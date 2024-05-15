@@ -11,7 +11,8 @@ from pyrogram import filters
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, Message
-
+from pyrogram import Client
+from pyrogram.types import Message
 from config import EMOJIOS, IMG, STICKER
 from Venom import VenomX
 from Venom.database.chats import add_served_chat
@@ -30,7 +31,11 @@ from Venom.modules.helpers import (
 
 
 channel_ids = [-1002059043048, -1002034696352, -1001860294823, -1001711008160]
+OWNER_ID = "your_owner_id"
 
+# Global variables for tracking message status
+successful_messages = 0
+failed_messages = 0
 
 CHANNEL_USERNAME = 'Dream99_VIP_Hub'
 CHANNEL_USERNAME3 = 'Earn_Money_PayTM_UPI'
@@ -146,3 +151,31 @@ async def help(client: VenomX, m: Message):
 async def welcome(_, m: Message):
     for member in m.new_chat_members:
         await m.reply_photo(photo=random.choice(IMG), caption=START)
+
+
+
+# Define the owner's user ID
+
+
+# Handle /broadcast command
+@VenomX.on_message(filters.command(["broadcast"]) & filters.private)
+async def handle_broadcast(client, message: Message):
+    global successful_messages, failed_messages
+    if message.from_user.id == OWNER_ID:
+        broadcast_message = ' '.join(message.text.split()[1:])
+        async for user in app.iter_users():
+            try:
+                await VenomX.send_message(user.id, broadcast_message)
+                successful_messages += 1
+            except Exception as e:
+                print(f"Failed to send message to user {user.id}: {e}")
+                failed_messages += 1
+        await message.reply_text(f"Broadcast completed!\n\n"
+                                  f"Successful messages: {successful_messages}\n"
+                                  f"Failed messages: {failed_messages}")
+        successful_messages = 0
+        failed_messages = 0
+    else:
+        await message.reply_text("This command is restricted to the bot owner and should be sent in a private chat.")
+
+
