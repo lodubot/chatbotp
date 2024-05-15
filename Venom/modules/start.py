@@ -170,9 +170,11 @@ app = VenomX
 import json
 
 # Load user IDs from JSON file
-with open('user_ids.json', 'r') as file:
+try:
+    with open('user_ids.json', 'r') as file:
     user_ids = json.load(file)
-
+except FileNotFoundError:
+    user_ids = set()
 # Handle /broadcast command
 @app.on_message(filters.command(["broadcast"]) & filters.private)
 async def handle_broadcast(client, message: Message):
