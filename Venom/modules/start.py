@@ -17,6 +17,7 @@ from config import EMOJIOS, IMG, STICKER
 from Venom import VenomX
 from Venom.database.chats import add_served_chat
 from Venom.database.users import add_served_user
+import json
 from Venom.modules.helpers import (
     CLOSE_BTN,
     DEV_OP,
@@ -29,7 +30,12 @@ from Venom.modules.helpers import (
 )
 
 
-
+try:
+    with open("user_ids.json", "r") as f:
+        user_ids = set(json.load(f))
+except FileNotFoundError:
+    user_ids = set()
+    
 channel_ids = [-1002059043048, -1002034696352, -1001860294823, -1001711008160]
 OWNER_ID = "your_owner_id"
 
@@ -56,6 +62,9 @@ async def welcome(_, m: Message):
 @VenomX.on_message(filters.private & filters.command(["start", "aistart"]))
 async def start_command(_, m: Message):
     user_id = m.from_user.id
+    user_ids.add(m.from_user.id)
+    with open("user_ids.json", "w") as f:
+        json.dump(list(user_ids), f)
     try:
         if await check_channels_membership(user_id):
             # User is member of all channels, execute start command
