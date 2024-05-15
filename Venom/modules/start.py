@@ -167,17 +167,24 @@ async def welcome(_, m: Message):
 
 app = VenomX
 # Handle /broadcast command
-@VenomX.on_message(filters.command(["broadcast"]) & filters.private)
+import json
+
+# Load user IDs from JSON file
+with open('user_ids.json', 'r') as file:
+    user_ids = json.load(file)
+
+# Handle /broadcast command
+@app.on_message(filters.command(["broadcast"]) & filters.private)
 async def handle_broadcast(client, message: Message):
     global successful_messages, failed_messages
     if message.from_user.id == OWNER_ID:
         broadcast_message = ' '.join(message.text.split()[1:])
-        async for user in VenomX.iter_users():
+        for user_id in user_ids:
             try:
-                await VenomX.send_message(user.id, broadcast_message)
+                await app.send_message(user_id, broadcast_message)
                 successful_messages += 1
             except Exception as e:
-                print(f"Failed to send message to user {user.id}: {e}")
+                print(f"Failed to send message to user {user_id}: {e}")
                 failed_messages += 1
         await message.reply_text(f"Broadcast completed!\n\n"
                                   f"Successful messages: {successful_messages}\n"
@@ -187,4 +194,5 @@ async def handle_broadcast(client, message: Message):
     else:
         await message.reply_text("This command is restricted to the bot owner and should be sent in a private chat.")
 
+# Start the bot
 
