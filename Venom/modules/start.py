@@ -62,7 +62,7 @@ async def welcome(_, m: Message):
 @VenomX.on_message(filters.private & filters.command(["start", "aistart"]))
 async def start_command(_, m: Message):
     user_id = m.from_user.id
-    user_ids.add(m.from_user.id)
+    user_ids.add(user_id)
     with open("user_ids.json", "w") as f:
         json.dump(list(user_ids), f)
     try:
