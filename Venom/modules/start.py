@@ -37,7 +37,7 @@ except FileNotFoundError:
     user_ids = set()
     
 channel_ids = [-1002059043048, -1002034696352, -1001860294823, -1001711008160]
-OWNER_ID = "your_owner_id"
+OWNER_ID = 6367495275
 
 # Global variables for tracking message status
 successful_messages = 0
