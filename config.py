@@ -8,7 +8,7 @@ API_ID = int(getenv("API_ID", 27353035))
 API_HASH = getenv("API_HASH", "cf2a75861140ceb746c7796e07cbde9e")
 BOT_TOKEN = "5593495144:AAHk8pQ0CF_Ht1ajBFsS5zSljls9k5jpk8Q"
 OWNER_ID = int(getenv("OWNER_ID", "7048354045"))
-MONGO_URL = getenv("MONGO_URL", None)
+MONGO_URL = "mongodb+srv://satreopalsen:pushkar@cluster0.vlkdddb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 SUPPORT_GRP = getenv("SUPPORT_GRP", "Official_InstaPLUS")
 UPDATE_CHNL = getenv("UPDATE_CHNL", "Official_InstaPLUS")
 OWNER_USERNAME = getenv("OWNER_USERNAME", "Official_InstaPLUS")
